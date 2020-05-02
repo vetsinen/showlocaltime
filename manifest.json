@@ -1,7 +1,8 @@
 {
   "background": {
     "scripts": [
-      "background.js"
+      "background.js",
+      "timeconvertor.js"
     ]
   },
   "permissions": [
@@ -16,6 +17,7 @@
     "default_icon": "icon128.png"
   },
   "manifest_version": 2,
-  "name": "My Cool Extension",
+  "name": "ShowLocalTime",
+  "description": "show local time for event on meetup etc.",
   "version": "0.1.1"
 }
