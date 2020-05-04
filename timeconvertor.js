@@ -1,5 +1,5 @@
 function convert(remoteDateTime) {
-    var arr, remoteTime, remoteDate;
+    let arr, remoteTime, remoteDate, offset=0;
     arr = remoteDateTime.split('\n');
     if (arr.length === 2 && arr[1] === '') {
         remoteDate = new Date();
@@ -22,22 +22,22 @@ function convert(remoteDateTime) {
         hours += 12;
     }
     switch (timezone) {
-        case 'MDT': {timezone='GMT-6';break}
-        case 'EDT': {timezone='GMT-4';break}
-        case 'PDT': {timezone='GMT-7';break}
-        case 'CDT': {timezone='GMT-5';break}
-
+        case 'MDT': {offset=-6;break}
+        case 'EDT': {offset=-4;break}
+        case 'PDT': {offset=-7;break}
+        case 'CDT': {offset=-5;break}
     }
 
     arr = timezone.split('GMT');
     if (arr.length === 2) {
-        let offset = parseInt(arr[1]);
-        hours = hours - offset+3;
+        offset = parseInt(arr[1]);
     }
+    let soffset = (offset<0?'-':'+')+('00' + Math.abs(offset)).slice(-2)+':00';
 
-    let fullStart = remoteDate + ('0000' + hours).slice(-2) + ':' + ('0000' + minutes).slice(-2) + ':00.000Z';
+    let fullStart = remoteDate + ('00' + hours).slice(-2) + ':' +
+        ('00' + minutes).slice(-2) + ':00.000'+soffset;
     let d = new Date(fullStart);
-    return d.toISOString().slice(11,16)
+    return d.toString().slice(16,21)+','+d.toString().slice(4,10);
 }
 
 // console.log(convert('10:30 AM to 8:30 PM GMT+1\n'));
