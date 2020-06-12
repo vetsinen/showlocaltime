@@ -37,7 +37,7 @@ function convert(remoteDateTime) {
     let fullStart = remoteDate + ('00' + hours).slice(-2) + ':' +
         ('00' + minutes).slice(-2) + ':00.000'+soffset;
     let d = new Date(fullStart);
-    return d.toString().slice(16,21)+','+d.toString().slice(4,10);
+    return d.toString().slice(16,21);//+','+d.toString().slice(4,10);
 }
 
 // console.log(convert('10:30 AM to 8:30 PM GMT+1\n'));
